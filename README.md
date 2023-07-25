@@ -25,7 +25,7 @@ Since the Dexcom infrastructure does not support CORS, this package is suitable 
 try to use this module from within a web application, the user's web browser will generate a CORS violation exception.
 
 # Installation
-`npm install @umlss/dexcom-js --save`
+`npm install dexcom-g7-js --save`
 
 # Basic Usage
 Users of this package are responsible for [acquiring Dexcom OAuth tokens](https://developer.dexcom.com/authentication) 
