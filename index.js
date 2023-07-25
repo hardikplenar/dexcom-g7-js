@@ -132,7 +132,7 @@ DexcomJS.getSandboxAuthenticationToken = async function(user) {
 		}
   };
 
-  const authResult = await httpClient.post('https://sandbox-api.dexcom.com/v2/oauth2/token', urlEncodedForm);
+  const authResult = await httpClient.post('https://sandbox-api.dexcom.com/v3/oauth2/token', urlEncodedForm);
 
   //console.log(authResult);
   //console.log(authResult.data);
@@ -195,7 +195,7 @@ DexcomJS.getEstimatedGlucoseValues = async function(oauthTokens, startTime, endT
   const parameters                   = { startDate: startDateString, endDate: endDateString };
   const httpConfig                   = { headers: {Authorization:  `Bearer ${possiblyRefreshedOauthTokens.dexcomOAuthToken.access_token}`}, params: parameters };
 
-  const result = await httpClient.get(`${this.options.apiUri}/v2/users/self/egvs`, httpConfig);
+  const result = await httpClient.get(`${this.options.apiUri}/v3/users/self/egvs`, httpConfig);
 
   const returnValue = {estimatedGlucoseValues: result.data};
   if (possiblyRefreshedOauthTokens !== oauthTokens) {
@@ -232,7 +232,7 @@ DexcomJS.getEstimatedGlucoseValuesAnyDateRange  = async function(oauthTokens, st
     const endDateString                = helpers.dexcomifyEpochTime(el.endTime);
     const parameters                   = { startDate: startDateString, endDate: endDateString };
     const httpConfig                   = { headers: {Authorization:  `Bearer ${possiblyRefreshedOauthTokens.dexcomOAuthToken.access_token}`}, params: parameters };
-    return httpClient.get(`${this.options.apiUri}/v2/users/self/egvs`, httpConfig);
+    return httpClient.get(`${this.options.apiUri}/v3/users/self/egvs`, httpConfig);
   });
   const results = await Promise.all(requests);
   const combinedEgvs = results.reduce((a, el)  => {
@@ -305,7 +305,7 @@ DexcomJS.getEvents = async function(oauthTokens, startTime, endTime) {
   const parameters                   = { startDate: startDateString, endDate: endDateString };
   const httpConfig                   = { headers: {Authorization:  `Bearer ${possiblyRefreshedOauthTokens.dexcomOAuthToken.access_token}`}, params: parameters };
 
-  const result = await httpClient.get(`${this.options.apiUri}/v2/users/self/events`, httpConfig);
+  const result = await httpClient.get(`${this.options.apiUri}/v3/users/self/events`, httpConfig);
 
   const returnValue = {events: result.data};
   if (possiblyRefreshedOauthTokens !== oauthTokens) {
@@ -354,7 +354,7 @@ DexcomJS.getDataRange = async function(oauthTokens) {
   const possiblyRefreshedOauthTokens = await helpers.refreshAccessToken(this.options, oauthTokens, false);
   const httpConfig                   = { headers: {Authorization:  `Bearer ${possiblyRefreshedOauthTokens.dexcomOAuthToken.access_token}`}};
 
-  const result = await httpClient.get(`${this.options.apiUri}/v2/users/self/dataRange`, httpConfig);
+  const result = await httpClient.get(`${this.options.apiUri}/v3/users/self/dataRange`, httpConfig);
 
   const returnValue = {dataRange: result.data};
   if (possiblyRefreshedOauthTokens !== oauthTokens) {
@@ -415,7 +415,7 @@ DexcomJS.getCalibrations = async function(oauthTokens, startTime, endTime) {
   const parameters                   = { startDate: startDateString, endDate: endDateString };
   const httpConfig                   = { headers: {Authorization:  `Bearer ${possiblyRefreshedOauthTokens.dexcomOAuthToken.access_token}`}, params: parameters };
 
-  const result = await httpClient.get(`${this.options.apiUri}/v2/users/self/calibrations`, httpConfig);
+  const result = await httpClient.get(`${this.options.apiUri}/v3/users/self/calibrations`, httpConfig);
 
   const returnValue = {calibrations: result.data};
   if (possiblyRefreshedOauthTokens !== oauthTokens) {
@@ -519,7 +519,7 @@ DexcomJS.getStatistics = async function(oauthTokens, startTime, endTime) {
     ]
   };
 
-  const result = await httpClient.post(`${this.options.apiUri}/v2/users/self/statistics`, requestBody, httpConfig);
+  const result = await httpClient.post(`${this.options.apiUri}/v3/users/self/statistics`, requestBody, httpConfig);
 
   const returnValue = {statistics: result.data};
   if (possiblyRefreshedOauthTokens !== oauthTokens) {

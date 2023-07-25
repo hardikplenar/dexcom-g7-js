@@ -212,7 +212,7 @@ async function refreshAccessToken(options, oauthTokens, force) {
     }
   };
 
-  const result = await httpClient.post(`${options.apiUri}/v2/oauth2/token`, urlEncodedForm, httpConfig);
+  const result = await httpClient.post(`${options.apiUri}/v3/oauth2/token`, urlEncodedForm, httpConfig);
   //console.log(result.status);
   //console.log(result.data);
 
