@@ -132,7 +132,7 @@ DexcomJS.getSandboxAuthenticationToken = async function(user) {
 		}
   };
 
-  const authResult = await httpClient.post('https://sandbox-api.dexcom.com/v3/oauth2/token', urlEncodedForm);
+  const authResult = await httpClient.post('https://sandbox-api.dexcom.com/v2/oauth2/token', urlEncodedForm);
 
   //console.log(authResult);
   //console.log(authResult.data);
